@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="questionsDAO" class="com.example.easyspring.dao.QuestionsDAO" init-method="loadQuestions">
+        <property name="resource" value="questions.csv"/>
+    </bean>
+
+    <bean id="personEntity" class="com.example.easyspring.entities.PersonEntity"/>
+
+    <bean id="ioServiceImpl" class="com.example.easyspring.services.IOServiceImpl">
+        <property name="personEntity" ref="personEntity"/>
+    </bean>
+
+    <bean id="quizServiceImpl" class="com.example.easyspring.services.QuizServiceImpl">
+        <property name="questionsDAO" ref="questionsDAO"/>
+        <property name="ioServiceImpl" ref="ioServiceImpl"/>
+    </bean>
+
+</beans>
+
+
